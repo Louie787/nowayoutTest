@@ -14,7 +14,7 @@ gulp.task("clean", async function () {
 gulp.task("browser-sync", function () {
   browserSync.init({
     server: {
-      baseDir: "./src"
+      baseDir: "./build"
     },
     notify: false,
     online: false,

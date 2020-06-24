@@ -1,0 +1,254 @@
+@import "vars";
+@import "fonts";
+
+@import "media";
+
+// start main settings
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: $main-font;
+  font-weight: 400;
+  color: $main-color;
+  background-color: #000;
+  overflow-x: hidden;
+  padding: 0 60px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $main-color;
+  transition: 0.2s;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.link {
+  &:hover {
+    color: $accent-color;
+  }
+}
+
+.hamburger {
+  width: 3.75rem;
+  height: 1.125rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  
+  &:hover .hamburger__line {
+    background-color: $accent-color;
+    transition:  0.2s;
+  }
+
+  &__line {
+    display: inline-block;
+    width: 100%;
+    height: .125rem;
+    background-color: $main-color;
+  }
+}
+
+.cart {
+  position: relative;
+
+  &__count {
+    display: inline-block;
+    width: 1.5625rem;
+    height: 1.375rem;
+    background-image: url("../img/cart-circle.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    font-size: .75rem;
+    font-weight: 700;
+    color: $accent-color;
+    text-align: center;
+    line-height: 1.375rem;
+    position: absolute;
+    top: -40%;
+    right: -50%;
+  }
+
+  &:hover svg {
+    fill: $accent-color;
+    transition: 0.2s;
+  }
+}
+
+.lang {
+  & input {
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    opacity: 0;
+
+    & + span {
+      font-size: .875rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+    }
+
+    &:checked + span {
+      color: $main-color;
+      transition: 0.2s;
+    }
+  }
+}
+// end main settings
+
+// start hero 
+.hero {
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3.75rem 0;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25%;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+
+    &-link {
+      font-size: .875rem;
+      font-weight: 700;
+    }
+  }
+
+  &__phone {
+    font-size: .875rem;
+    font-weight: 700;
+  }
+}
+
+// start rooms
+.rooms {
+  display: flex;
+  justify-content: space-between;
+  height: calc(100vh - 9.8125rem);
+
+  &__item {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    flex: 1;
+    margin-right: .625rem;
+    padding: 3.125rem 3.75rem;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    cursor: pointer;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 52.74%, rgba(17, 13, 13, 0.9) 100%);
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &-wrapper {
+      height: 7.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    &-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 2.25rem;
+      margin: 0;
+    }
+
+    &-type {
+      font-size: .875rem;
+      font-weight: 300;
+      margin: 0;
+      position: relative;
+
+      & span {
+        display: inline-block;
+        width: 1.4375rem;
+        height: 1.0625rem;
+        background-image: url("../img/mask.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        transform: translate(.625rem, 30%);
+      }
+    }
+
+    &-sale {
+      width: 102%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem;
+      position: absolute;
+      top: 1.6875rem;
+      left: -1%;
+      background: #ed0000;
+      transform: matrix(1, 0.01, 0.01, 1, 0, 0);
+
+      & p {
+        margin: 0;
+
+        &:first-of-type {
+          font-family: $secondary-font;
+          font-size: 3.5rem;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+        &:last-of-type {
+          font-size: .875rem;
+          font-weight: 300;
+
+          & span {
+            font-size: 1.125rem;
+            font-weight: 900;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}
+// end rooms
+// end hero 

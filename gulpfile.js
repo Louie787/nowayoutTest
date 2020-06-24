@@ -8,13 +8,13 @@ const gulp = require("gulp"),
   browserSync = require("browser-sync");
 
 gulp.task("clean", async function () {
-  del.sync("./dist");
+  del.sync("./build");
 });
 
 gulp.task("browser-sync", function () {
   browserSync.init({
     server: {
-      baseDir: "./"
+      baseDir: "./src"
     },
     notify: false,
     online: false,
@@ -24,7 +24,9 @@ gulp.task("browser-sync", function () {
 });
 
 gulp.task("html", function () {
-  return gulp.src("./*.html").pipe(browserSync.reload({ stream: true }));
+  return gulp.src("./src/*.html")
+    .pipe(browserSync.reload({ stream: true }))
+    .pipe(gulp.dest("./build"));
 });
 
 gulp.task("style", function () {
@@ -43,7 +45,7 @@ gulp.task("style", function () {
       })
     )
     .pipe(concat("style.min.css"))
-    .pipe(gulp.dest("./css"))
+    .pipe(gulp.dest("./build/css"))
     .pipe(browserSync.reload({ stream: true }));
 });
 
@@ -52,7 +54,7 @@ gulp.task("script", function () {
     .src(["./src/js/**/*.js"])
     .pipe(concat("script.min.js"))
     .pipe(uglify())
-    .pipe(gulp.dest("./js"))
+    .pipe(gulp.dest("./build/js"))
     .pipe(browserSync.reload({ stream: true }));
 });
 
@@ -66,26 +68,16 @@ gulp.task("img", function () {
         imagemin.optipng({ optimizationLevel: 5 })
       ])
     )
-    .pipe(gulp.dest("./img"))
+    .pipe(gulp.dest("./build/img"))
     .pipe(browserSync.stream());
 });
 
-gulp.task("export", function () {
-  const buildHtml = gulp.src("./*.html").pipe(gulp.dest("./dist"));
-  const buildFonts = gulp.src("./fonts/**/*.*").pipe(gulp.dest("./dist/fonts"));
-  const buildImg = gulp.src("./img/**/*.*").pipe(gulp.dest("./dist/img"));
-  const buildCss = gulp.src("./css/**/*.css").pipe(gulp.dest("./dist/css"));
-  const buildJs = gulp.src("./js/**/*.js").pipe(gulp.dest("./dist/js"));
-});
-
 gulp.task("watch", function () {
-  gulp.watch("./*.html", gulp.parallel("html"));
+  gulp.watch("./src/*.html", gulp.parallel("html"));
   gulp.watch("./src/scss/**/*.scss", gulp.parallel("style"));
   gulp.watch("./src/js/**/*.js", gulp.parallel("script"));
   gulp.watch("./src/img/**/*.*", gulp.parallel("img"));
 });
-
-gulp.task("build", gulp.series("clean", "export"));
 
 gulp.task(
   "default",
